@@ -1,8 +1,9 @@
-import { QuestionCard } from '../../Components/QuestionCard'
 import { API_URL } from '../../API'
 import cls from './HomePage.module.css'
 import { useState, useEffect } from 'react'
 import { QuestionCardList } from '../../Components/QuestionCardList'
+import { Loader } from '../../Components/Loader'
+
 
 export const HomePage = () => {
 
@@ -24,7 +25,8 @@ useEffect(() => {
 }, [])
   return (
     <>
-    <QuestionCardList cards={Questions}/>
+    <Loader />
+    <QuestionCardList cards={Questions} />
     </>
   )
 }
