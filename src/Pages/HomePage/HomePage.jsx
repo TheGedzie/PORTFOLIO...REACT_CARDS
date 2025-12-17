@@ -1,14 +1,14 @@
 import { API_URL } from '../../API'
 import cls from './HomePage.module.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { QuestionCardList } from '../../Components/QuestionCardList'
 import { Loader } from '../../Components/Loader'
 import { useFetch } from '../../hooks/useFetch'
 
 
 export const HomePage = () => {
-
   const [Questions, setQuestions] = useState([])
+  const [searchValue, setSearchValue] = useState('')
 
   const [getQuestions, IsLoading, error] = useFetch( async(url) => {
     const response = await fetch(`${API_URL}/${url}`)
@@ -20,8 +20,12 @@ export const HomePage = () => {
 useEffect(() => {
   getQuestions('react')
 }, [])
+const onSearchChangeHandler = (e) => {
+  setSearchValue(e.target.value)
+}
   return (
     <>
+    <input type="text" value={searchValue} onChange={onSearchChangeHandler}/>
     {IsLoading && <Loader />}
     <QuestionCardList cards={Questions} />
     {error && <p>{error}</p>}
