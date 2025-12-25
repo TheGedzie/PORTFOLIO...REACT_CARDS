@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { QuestionCardList } from '../../Components/QuestionCardList'
 import { Loader } from '../../Components/Loader'
 import { useFetch } from '../../hooks/useFetch'
+import { SearchInput } from '../../Components/SearchInput/SearchInput'
 
 
 export const HomePage = () => {
@@ -25,7 +26,9 @@ const onSearchChangeHandler = (e) => {
 }
   return (
     <>
-    <input type="text" value={searchValue} onChange={onSearchChangeHandler}/>
+    <div className={cls.controlsContainer}>
+     <SearchInput value={searchValue} onChange={onSearchChangeHandler}/>
+    </div>
     {IsLoading && <Loader />}
     <QuestionCardList cards={Questions} />
     {error && <p>{error}</p>}
